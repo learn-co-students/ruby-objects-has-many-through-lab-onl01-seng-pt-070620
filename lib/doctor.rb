@@ -1,6 +1,6 @@
+
 class Doctor
   attr_accessor :name
-  attr_reader :patient
   @@all = []
 
   def initialize(name)
@@ -12,15 +12,17 @@ class Doctor
     @@all
   end
 
-  def new_appointment(patient, date)
+  def new_appointment(date, patient)
     Appointment.new(date, patient, self)
-  end
+  end 
 
   def appointments
     Appointment.all.select {|appointment| appointment.doctor == self }
   end
 
- def patients
-    appointments.map {|app|app.patient}
-  end
+  def patients 
+    appointments.map do |appointment|
+      appointment.patient
+    end
+  end 
 end
