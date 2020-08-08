@@ -9,8 +9,8 @@ class Patient
 def self.all
   @@all
 end
-  def new_appointment(doctor, date)
-    Appointment.new(self, doctor, date)
+  def new_appointment(date, doctor)
+    Appointment.new(date, self, doctor)
   end
 
  def appointments
@@ -18,9 +18,10 @@ end
   end
 
   def doctors
-    self.appointments.collect {|appointment| appointment.doctor}
-  end 
+    self.appointments.collect do |appointment| appointment.doctor
+  end.uniq 
 end
+end 
   
 
   
